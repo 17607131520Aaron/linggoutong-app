@@ -16,4 +16,3 @@ export interface StructuredStorage<TRecord, TQuery = unknown> {
   query(params: TQuery): Promise<TRecord[]>;
   clear(): Promise<void>;
 }
-

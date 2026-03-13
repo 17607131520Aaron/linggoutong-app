@@ -9,9 +9,7 @@ export interface InMemoryQuery {
   predicate?: (record: InMemoryRecord) => boolean;
 }
 
-export class StructuredMemoryStorage
-  implements StructuredStorage<InMemoryRecord, InMemoryQuery>
-{
+export class StructuredMemoryStorage implements StructuredStorage<InMemoryRecord, InMemoryQuery> {
   private readonly store = new Map<string, InMemoryRecord>();
 
   async insert(record: InMemoryRecord): Promise<void> {
@@ -54,4 +52,3 @@ export class StructuredMemoryStorage
     this.store.clear();
   }
 }
-
