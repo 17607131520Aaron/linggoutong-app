@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    // 必备：ESLint 检查和自动修复
+    "dbaeumer.vscode-eslint",
+
+    // 必备：Prettier 代码格式化
+    "esbenp.prettier-vscode",
+
+    // React Native 调试和工具
+    "msjsdiag.vscode-react-native"
+  ]
+}
