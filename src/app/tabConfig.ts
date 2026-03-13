@@ -13,6 +13,8 @@ const MINE_TAB: ITabConfig = {
   icon: '👤',
   component: MineHome,
   moduleKey: 'mine',
+  // 示例：我的页不显示顶部标题栏，由页面内部自己控制
+  showHeader: true,
 };
 
 // 首页
@@ -22,6 +24,9 @@ const HOME_TAB: ITabConfig = {
   icon: '🏠',
   component: Home,
   moduleKey: 'home',
+  // 示例：首页显示顶部标题栏，并自定义标题文案
+  headerTitle: '首页 - KV 存储示例',
+  showHeader: true,
 };
 
 // ==================== 各角色的 Tab 配置 ====================

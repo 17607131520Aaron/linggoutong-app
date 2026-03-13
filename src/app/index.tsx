@@ -5,8 +5,6 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { allRoutes } from '~/routers';
 
-import MainTabsScreen from './MainTabsScreen.tsx';
-
 const RootStack = createNativeStackNavigator();
 
 const AppContent: React.FC = () => {
@@ -24,18 +22,10 @@ const AppContent: React.FC = () => {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <RootStack.Screen
-          component={MainTabsScreen}
-          name='MainTabs'
-          options={{ headerShown: false }}
-        />
+      <RootStack.Navigator>
         {allRoutes.map((route) => {
           const routeOptions = {
+            headerShown: route.options?.headerShown ?? false,
             ...route.options,
           };
 

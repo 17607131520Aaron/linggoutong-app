@@ -8,6 +8,7 @@ const Tab = createBottomTabNavigator();
 
 const MainTabsScreen: React.FC = () => {
   const tabs = getTabsByRole('admin');
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -22,12 +23,19 @@ const MainTabsScreen: React.FC = () => {
             component={tab.component}
             name={tab.name}
             options={{
-              title: tab.label, // 使用 label 作为标题
+              // 顶部标题：优先使用自定义 header，其次 headerTitle，最后用 label
+              title: tab.headerTitle ?? tab.label,
               tabBarLabel: tab.label,
               tabBarIcon: ({ color }) => (
                 <Text style={[styles.tabIcon, { color }]}>{tab.icon}</Text>
               ),
-              headerShown: false,
+              headerShown: tab.showHeader ?? true,
+              ...(tab.header
+                ? {
+                    // 如果配置了自定义 header 组件，则交给 React Navigation 渲染
+                    header: tab.header,
+                  }
+                : null),
             }}
           />
         );

@@ -25,8 +25,8 @@ const mineRoutes = [
     name: 'Home',
     component: HomePage,
     options: {
-      title: '首页',
-      headerShown: false,
+      title: '首页 - KV 存储示例',
+      headerShown: true,
     },
   },
   {
