@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '~/common/colors';
 import { BackArrowIcon, SearchIcon } from '~/components/SvgIcons';
 
-interface AppHeaderProps {
+export interface AppHeaderProps {
   title: string;
   /** 是否展示返回按钮（默认不展示） */
   showBack?: boolean;
