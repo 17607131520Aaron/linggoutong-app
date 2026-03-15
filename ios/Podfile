@@ -23,25 +23,6 @@ target 'LingGoApp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  # react-native-permissions: 声明需要使用的原生权限模块
-  permissions_path = '../node_modules/react-native-permissions/ios'
-  pod 'Permission-Camera', :path => "#{permissions_path}"
-  pod 'Permission-PhotoLibrary', :path => "#{permissions_path}"
-  pod 'Permission-PhotoLibraryAddOnly', :path => "#{permissions_path}"
-  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}"
-  pod 'Permission-LocationAlways', :path => "#{permissions_path}"
-  pod 'Permission-Microphone', :path => "#{permissions_path}"
-  pod 'Permission-Notifications', :path => "#{permissions_path}"
-  pod 'Permission-Contacts', :path => "#{permissions_path}"
-  pod 'Permission-Calendars', :path => "#{permissions_path}"
-  pod 'Permission-Reminders', :path => "#{permissions_path}"
-  pod 'Permission-BluetoothPeripheral', :path => "#{permissions_path}"
-  pod 'Permission-Motion', :path => "#{permissions_path}"
-  pod 'Permission-FaceID', :path => "#{permissions_path}"
-  pod 'Permission-SpeechRecognition', :path => "#{permissions_path}"
-  pod 'Permission-Siri', :path => "#{permissions_path}"
-  pod 'Permission-Tracking', :path => "#{permissions_path}"
-
   post_install do |installer|
     react_native_post_install(
       installer,
