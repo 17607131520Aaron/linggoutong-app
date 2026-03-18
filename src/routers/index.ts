@@ -10,6 +10,8 @@ export interface IRouteConfig {
   name: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: ComponentType<any>;
+  /** 是否显示顶部标题栏（默认不显示） */
+  showHeader?: boolean;
   options?: NativeStackNavigationOptions;
   /** 自定义顶部导航栏以下的页面内容区域样式 */
   contentStyle?: StyleProp<ViewStyle>;
@@ -23,9 +25,7 @@ export const allRoutes: IRouteConfig[] = [
   {
     name: 'MainTabs',
     component: MainTabsScreen,
-    options: {
-      headerShown: false,
-    },
+    showHeader: false,
   },
   ...mineRoutes,
 ];

@@ -4,7 +4,6 @@
 
 import Home from '~/pages/Home';
 import MineHome from '~/pages/Mine';
-import colors from '~/common/colors';
 
 import type { ITabConfig, TUserRole } from './typs.ts';
 
@@ -16,9 +15,6 @@ const MINE_TAB: ITabConfig = {
   moduleKey: 'mine',
   // 示例：我的页显示顶部标题栏，并把主体内容区域背景改成白色
   showHeader: true,
-  sceneStyle: {
-    backgroundColor: colors.white,
-  },
 };
 
 // 首页

@@ -4,45 +4,47 @@ import LoginPage from '~/pages/Login';
 import MineHomePage from '~/pages/Mine';
 import RegisterPage from '~/pages/Register';
 
-const mineRoutes = [
+import type { IRouteConfig } from './index';
+
+const mineRoutes: IRouteConfig[] = [
   {
     name: 'Login',
     component: LoginPage,
+    showHeader: true,
     options: {
       title: '登录',
-      headerShown: true,
     },
   },
   {
     name: 'Register',
     component: RegisterPage,
+    showHeader: true,
     options: {
       title: '注册',
-      headerShown: true,
     },
   },
   {
     name: 'Home',
     component: HomePage,
+    showHeader: true,
     options: {
       title: '首页 - KV 存储示例',
-      headerShown: true,
     },
   },
   {
     name: 'MineHome',
     component: MineHomePage,
+    showHeader: true,
     options: {
       title: '我的',
-      headerShown: true,
     },
   },
   {
     name: 'About',
     component: AboutPage,
+    showHeader: true,
     options: {
       title: '关于',
-      headerShown: true,
     },
   },
 ];

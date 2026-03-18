@@ -34,15 +34,16 @@ const AppContent: React.FC = () => {
           headerShadowVisible: false,
           animation: 'slide_from_right',
           contentStyle: defaultContentStyle,
-          header: (props) => <HeaderBar {...props} title={props.route.name} />,
+          header: (props) => <HeaderBar {...props} title={props.options.title} />,
         }}
       >
         {allRoutes.map((route) => {
           const routeOptions = {
-            headerShown: route.options?.headerShown ?? false,
+            headerShown: route.showHeader ?? route.options?.headerShown ?? false,
             contentStyle: route.contentStyle
               ? [defaultContentStyle, route.contentStyle]
               : defaultContentStyle,
+
             ...route.options,
           };
 

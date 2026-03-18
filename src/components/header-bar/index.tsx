@@ -1,8 +1,4 @@
-import {
-  useNavigation,
-  type NavigationProp,
-  type ParamListBase,
-} from '@react-navigation/native';
+import { type NavigationProp, type ParamListBase, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -10,13 +6,14 @@ import colors from '~/common/colors';
 import { BackArrowIcon } from '~/components/SvgIcons';
 
 interface HeaderBarProps {
-  title: string;
+  title: React.ReactNode;
   rightContent?: React.ReactNode;
   leftContent?: React.ReactNode;
 }
 
 const HeaderBar: React.FC<HeaderBarProps> = (props) => {
   const { title } = props;
+
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
   const handleBackPress = (): void => {

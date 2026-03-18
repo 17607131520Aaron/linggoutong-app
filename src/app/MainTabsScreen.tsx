@@ -22,7 +22,8 @@ const MainTabsScreen: React.FC = () => {
         tabBarInactiveTintColor: colors.tabInactive,
         headerBackVisible: false,
         headerShadowVisible: false,
-        header: (props) => <HeaderBar {...props} title={props.route.name} />,
+
+        header: (props) => <HeaderBar {...props} title={props.options.title} />,
         sceneStyle: defaultSceneStyle,
       })}
     >
