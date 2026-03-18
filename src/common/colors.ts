@@ -4,6 +4,7 @@ const colors = {
   orange: '#ff6900',
   white: '#FFFFFF',
   black: '#000000',
+  bg: '#F5F6FA',
 
   // 背景色
   background: '#F5F5F5',

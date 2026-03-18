@@ -3,7 +3,8 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 import { getTabsByRole } from '~/app/tabConfig';
-import { AppHeader } from '~/components/AppHeader';
+import colors from '~/common/colors';
+import HeaderBar from '~/components/header-bar';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,14 +13,23 @@ const MainTabsScreen: React.FC = () => {
 
   return (
     <Tab.Navigator
-      screenOptions={{
-        tabBarActiveTintColor: '#007AFF',
-        tabBarInactiveTintColor: '#8E8E93',
-      }}
+      screenOptions={() => ({
+        tabBarActiveTintColor: colors.tabActive,
+        tabBarInactiveTintColor: colors.tabInactive,
+        headerBackVisible: false,
+        headerShadowVisible: false,
+        headerStyle: {
+          backgroundColor: colors.bg,
+          height: 48,
+        },
+        header: (props) => <HeaderBar {...props} title={props.route.name} />,
+        sceneContainerStyle: {
+          flex: 1,
+          backgroundColor: 'red',
+        },
+      })}
     >
       {tabs.map((tab) => {
-        const title = tab.headerTitle ?? tab.label;
-
         return (
           <Tab.Screen
             key={tab.name}
@@ -27,19 +37,10 @@ const MainTabsScreen: React.FC = () => {
             name={tab.name}
             options={{
               tabBarLabel: tab.label,
+              title: tab.label,
               tabBarIcon: ({ color }) => (
                 <Text style={[styles.tabIcon, { color }]}>{tab.icon}</Text>
               ),
-              headerShown: tab.showHeader ?? true,
-              ...(tab.header
-                ? {
-                    // 如果配置了自定义 header 组件，则交给 React Navigation 渲染
-                    header: tab.header,
-                  }
-                : {
-                    // 默认使用统一风格的 AppHeader
-                    header: () => <AppHeader showBack title={title} />,
-                  }),
             }}
           />
         );

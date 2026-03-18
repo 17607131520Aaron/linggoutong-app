@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
-import colors from '~/common/colors';
 import {
   isGranted,
   requestCameraPermission,
@@ -105,7 +104,6 @@ const HomePage: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.orange,
     alignItems: 'center',
     justifyContent: 'center',
   },

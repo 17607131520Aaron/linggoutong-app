@@ -1,8 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { RootSiblingParent } from 'react-native-root-siblings';
 
+import colors from '~/common/colors';
 import { allRoutes } from '~/routers';
 
 const RootStack = createNativeStackNavigator();
@@ -22,7 +23,18 @@ const AppContent: React.FC = () => {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator>
+      <RootStack.Navigator
+        screenOptions={{
+          headerBackVisible: false,
+          headerShadowVisible: false,
+          animation: 'slide_from_right',
+          headerStyle: { backgroundColor: colors.bg },
+          contentStyle: {
+            backgroundColor: 'red',
+            flex: 1,
+          },
+        }}
+      >
         {allRoutes.map((route) => {
           const routeOptions = {
             headerShown: route.options?.headerShown ?? false,
@@ -45,9 +57,9 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <SafeAreaProvider>
+    <RootSiblingParent>
       <AppContent />
-    </SafeAreaProvider>
+    </RootSiblingParent>
   );
 };
 
