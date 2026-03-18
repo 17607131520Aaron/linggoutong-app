@@ -2,7 +2,9 @@
  * App 导航相关类型定义
  */
 
+import type { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
 import type { ComponentType, ReactNode } from 'react';
+import type { StyleProp, ViewStyle } from 'react-native';
 // import type { INavigationBarProps } from '~/components/NavigationBar/types.ts';
 
 export type TUserRole = 'engineer' | 'institution' | 'admin';
@@ -23,6 +25,10 @@ export interface ITabConfig {
    * 如果提供，则优先使用该组件作为 header
    */
   header?: () => ReactNode;
+  /** 自定义顶部导航栏以下的页面内容区域样式 */
+  sceneStyle?: StyleProp<ViewStyle>;
+  /** 原生 Tab 配置透传 */
+  options?: BottomTabNavigationOptions;
   /** 自定义 NavigationBar 配置 */
   // navBarProps?: INavigationBarProps;
 }

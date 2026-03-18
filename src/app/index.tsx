@@ -4,9 +4,14 @@ import React, { useEffect } from 'react';
 import { RootSiblingParent } from 'react-native-root-siblings';
 
 import colors from '~/common/colors';
+import HeaderBar from '~/components/header-bar';
 import { allRoutes } from '~/routers';
 
 const RootStack = createNativeStackNavigator();
+const defaultContentStyle = {
+  backgroundColor: colors.bg,
+  flex: 1,
+} as const;
 
 const AppContent: React.FC = () => {
   // 获取本地的用户信息
@@ -28,16 +33,16 @@ const AppContent: React.FC = () => {
           headerBackVisible: false,
           headerShadowVisible: false,
           animation: 'slide_from_right',
-          headerStyle: { backgroundColor: colors.bg },
-          contentStyle: {
-            backgroundColor: 'red',
-            flex: 1,
-          },
+          contentStyle: defaultContentStyle,
+          header: (props) => <HeaderBar {...props} title={props.route.name} />,
         }}
       >
         {allRoutes.map((route) => {
           const routeOptions = {
             headerShown: route.options?.headerShown ?? false,
+            contentStyle: route.contentStyle
+              ? [defaultContentStyle, route.contentStyle]
+              : defaultContentStyle,
             ...route.options,
           };
 

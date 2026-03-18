@@ -36,8 +36,8 @@
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
 
-    // 忽略 baseUrl 弃用警告（TypeScript 6.0）
-    "ignoreDeprecations": "6.0"
+    // 忽略 baseUrl 弃用警告
+    "ignoreDeprecations": "5.0"
   },
   "include": [
     "src",

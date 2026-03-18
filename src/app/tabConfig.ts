@@ -4,6 +4,7 @@
 
 import Home from '~/pages/Home';
 import MineHome from '~/pages/Mine';
+import colors from '~/common/colors';
 
 import type { ITabConfig, TUserRole } from './typs.ts';
 
@@ -13,8 +14,11 @@ const MINE_TAB: ITabConfig = {
   icon: '👤',
   component: MineHome,
   moduleKey: 'mine',
-  // 示例：我的页不显示顶部标题栏，由页面内部自己控制
+  // 示例：我的页显示顶部标题栏，并把主体内容区域背景改成白色
   showHeader: true,
+  sceneStyle: {
+    backgroundColor: colors.white,
+  },
 };
 
 // 首页

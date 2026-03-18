@@ -7,6 +7,10 @@ import colors from '~/common/colors';
 import HeaderBar from '~/components/header-bar';
 
 const Tab = createBottomTabNavigator();
+const defaultSceneStyle = {
+  flex: 1,
+  backgroundColor: colors.bg,
+} as const;
 
 const MainTabsScreen: React.FC = () => {
   const tabs = getTabsByRole('admin');
@@ -18,15 +22,8 @@ const MainTabsScreen: React.FC = () => {
         tabBarInactiveTintColor: colors.tabInactive,
         headerBackVisible: false,
         headerShadowVisible: false,
-        headerStyle: {
-          backgroundColor: colors.bg,
-          height: 48,
-        },
         header: (props) => <HeaderBar {...props} title={props.route.name} />,
-        sceneContainerStyle: {
-          flex: 1,
-          backgroundColor: 'red',
-        },
+        sceneStyle: defaultSceneStyle,
       })}
     >
       {tabs.map((tab) => {
@@ -36,11 +33,14 @@ const MainTabsScreen: React.FC = () => {
             component={tab.component}
             name={tab.name}
             options={{
+              headerShown: tab.showHeader ?? true,
               tabBarLabel: tab.label,
-              title: tab.label,
+              title: tab.headerTitle ?? tab.label,
+              sceneStyle: tab.sceneStyle ? [defaultSceneStyle, tab.sceneStyle] : defaultSceneStyle,
               tabBarIcon: ({ color }) => (
                 <Text style={[styles.tabIcon, { color }]}>{tab.icon}</Text>
               ),
+              ...tab.options,
             }}
           />
         );

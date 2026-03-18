@@ -1,4 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
+import {
+  useNavigation,
+  type NavigationProp,
+  type ParamListBase,
+} from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -13,7 +17,7 @@ interface HeaderBarProps {
 
 const HeaderBar: React.FC<HeaderBarProps> = (props) => {
   const { title } = props;
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
 
   const handleBackPress = (): void => {
     // 首先判断是否有上一页。没有就返回首页或登录页
@@ -53,6 +57,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.border,
+    backgroundColor: colors.white,
   },
   titleContainer: {
     paddingHorizontal: 8,
