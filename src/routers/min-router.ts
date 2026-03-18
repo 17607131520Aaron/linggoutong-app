@@ -28,7 +28,7 @@ const mineRoutes: IRouteConfig[] = [
     component: HomePage,
     showHeader: true,
     options: {
-      title: '首页 - KV 存储示例',
+      title: '首页',
     },
   },
   {
