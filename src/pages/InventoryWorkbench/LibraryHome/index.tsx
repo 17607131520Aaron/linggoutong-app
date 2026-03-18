@@ -1,7 +1,8 @@
-import React from 'react';
 import { Text, View } from 'react-native';
 
-const LibraryHome: React.FC = () => {
+import type { FC } from 'react';
+
+const LibraryHome: FC = () => {
   return (
     <View>
       <Text>库管工作台-首页</Text>

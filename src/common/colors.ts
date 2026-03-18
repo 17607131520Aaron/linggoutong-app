@@ -1,38 +1,47 @@
 const colors = {
-  // 基础颜色
-  yellow: '#FFBE1F',
-  orange: '#ff6900',
+  // Base
   white: '#FFFFFF',
   black: '#000000',
-  bg: '#F5F6FA',
 
-  // 背景色
-  background: '#F5F5F5',
-  backgroundSecondary: '#F2F2F7',
-  placeholder: '#F0F0F0',
+  // Brand
+  brandPrimary: '#2B6BFF',
+  brandPrimaryAlt: '#1890FF',
+  brandPrimaryLight: '#8AB4F8',
 
-  // 边框色
-  border: '#E5E5E5',
+  // Background
+  pageBackground: '#F5F6F8',
+  surfaceBackground: '#F5F5F5',
+  surfaceBackgroundSecondary: '#F2F2F7',
+  surfaceHeader: '#3376FF',
+  surfaceHeaderLight: '#4C87FF',
+  surfacePlaceholder: '#F0F0F0',
 
-  // 文字颜色
-  text: '#333333',
-  textPrimary: '#000000',
-  textSecondary: '#999999',
+  // Text
+  textMain: '#222222',
+  textBody: '#333333',
+  textInverse: '#FFFFFF',
+  textSecondary: '#888888',
   textTertiary: '#666666',
+  textGray: '#AAAAAA',
   textMuted: '#8E8E93',
 
-  // 主题色
-  primary: '#007AFF',
-  primaryAlt: '#1890FF',
-  primaryLight: '#B5D8FF',
+  // Border
+  borderLight: '#EBEBEB',
+  borderDefault: '#E5E5E5',
 
-  // 状态色
-  warning: '#FF6B00',
+  // Status / Accent
   success: '#52C41A',
-  error: '#FF3B30',
+  warning: '#FF6B00',
+  danger: '#FF4D4F',
+  accentYellow: '#FFBE1F',
+  accentOrange: '#FF8A35',
+  accentOrangeDark: '#ff6900',
+  accentPurple: '#9B63F8',
 
-  // Tab 颜色
-  tabActive: '#007AFF',
+  // Tag / Tab
+  tagBlueBg: '#F0F5FF',
+  tagOrangeBg: '#FFF4E8',
+  tabActive: '#2B6BFF',
   tabInactive: '#8E8E93',
 } as const;
 

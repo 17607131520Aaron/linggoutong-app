@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: '700',
-    color: colors.textPrimary,
+    color: colors.textMain,
     marginBottom: 12,
   },
   message: {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 12,
     borderRadius: 999,
-    backgroundColor: colors.primary,
+    backgroundColor: colors.brandPrimary,
   },
   buttonText: {
     fontSize: 15,

@@ -32,7 +32,7 @@ const HeaderBar: React.FC<HeaderBarProps> = (props) => {
         hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
         onPress={handleBackPress}
       >
-        <BackArrowIcon color={colors.textPrimary} size={20} />
+        <BackArrowIcon color={colors.textMain} size={20} />
       </TouchableOpacity>
       <View style={styles.titleContainer}>
         <Text ellipsizeMode='tail' numberOfLines={1} style={styles.titleText}>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: colors.border,
+    borderBottomColor: colors.borderLight,
     backgroundColor: colors.white,
   },
   titleContainer: {
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   titleText: {
     fontSize: 16,
     fontWeight: '500',
-    color: colors.textPrimary,
+    color: colors.textMain,
   },
   rightContainer: {
     width: 'auto',

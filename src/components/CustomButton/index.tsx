@@ -39,7 +39,7 @@ const CustomButton: React.FC<CustomButtonProps> = ({
 const styles = StyleSheet.create({
   // 按钮容器样式
   buttonContainer: {
-    backgroundColor: colors.primary, // 背景色
+    backgroundColor: colors.brandPrimary, // 背景色
     borderRadius: 8, // 圆角
     paddingVertical: 12, // 上下内边距
     paddingHorizontal: 24, // 左右内边距
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   // 禁用状态容器样式
   disabledButton: {
-    backgroundColor: colors.border, // 禁用时背景色
+    backgroundColor: colors.borderLight, // 禁用时背景色
     elevation: 0, // 禁用时去掉阴影
   },
   // 按钮文字样式

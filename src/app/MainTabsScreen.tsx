@@ -9,7 +9,7 @@ import HeaderBar from '~/components/header-bar';
 const Tab = createBottomTabNavigator();
 const defaultSceneStyle = {
   flex: 1,
-  backgroundColor: colors.bg,
+  backgroundColor: colors.pageBackground,
 } as const;
 
 const MainTabsScreen: React.FC = () => {

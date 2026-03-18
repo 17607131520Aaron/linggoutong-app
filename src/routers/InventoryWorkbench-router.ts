@@ -1,7 +1,9 @@
 // 库管工作台路由管理
 import LibraryHome from '~/pages/InventoryWorkbench/LibraryHome';
-import LibraryMineHome from '~/pages/InventoryWorkbench/LibraryMineHome';
-import LibrarySparePartHome from '~/pages/InventoryWorkbench/LibrarySparePartHome';
+import {
+  default as LibraryMineHome,
+  default as LibrarySparePartHome,
+} from '~/pages/InventoryWorkbench/LibrarySparePartHome';
 
 import type { IRouteConfig } from './index';
 

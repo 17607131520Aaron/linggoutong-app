@@ -11,7 +11,7 @@ const StartupScreen: React.FC = (): React.JSX.Element => {
         <Text style={styles.title}>LingGo</Text>
         <Text style={styles.subtitle}>正在进入应用，请稍候</Text>
       </View>
-      <ActivityIndicator color={colors.primary} size='large' />
+      <ActivityIndicator color={colors.brandPrimary} size='large' />
     </View>
   );
 };
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: '700',
-    color: colors.textPrimary,
+    color: colors.textMain,
     marginBottom: 8,
   },
   subtitle: {

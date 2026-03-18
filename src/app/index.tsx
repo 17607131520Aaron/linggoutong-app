@@ -13,7 +13,7 @@ const RootStack = createNativeStackNavigator();
 const STARTUP_MIN_DURATION = 600;
 const STARTUP_TIMEOUT = 8000;
 const defaultContentStyle = {
-  backgroundColor: colors.bg,
+  backgroundColor: colors.pageBackground,
   flex: 1,
 } as const;
 
