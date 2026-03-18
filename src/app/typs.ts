@@ -7,7 +7,7 @@ import type { ComponentType, ReactNode } from 'react';
 import type { StyleProp, ViewStyle } from 'react-native';
 // import type { INavigationBarProps } from '~/components/NavigationBar/types.ts';
 
-export type TUserRole = 'engineer' | 'institution' | 'admin';
+export type TUserRole = 'engineer' | 'institution' | 'admin' | 'library';
 
 /** Tab 配置项 */
 export interface ITabConfig {

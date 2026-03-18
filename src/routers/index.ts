@@ -1,5 +1,6 @@
 import MainTabsScreen from '~/app/MainTabsScreen.tsx';
 
+import InventoryWorkbench from './InventoryWorkbench-router';
 import mineRoutes from './min-router';
 
 import type { NativeStackNavigationOptions } from '@react-navigation/native-stack';
@@ -28,4 +29,5 @@ export const allRoutes: IRouteConfig[] = [
     showHeader: false,
   },
   ...mineRoutes,
+  ...InventoryWorkbench,
 ];

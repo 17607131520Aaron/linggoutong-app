@@ -13,7 +13,7 @@ const defaultSceneStyle = {
 } as const;
 
 const MainTabsScreen: React.FC = () => {
-  const tabs = getTabsByRole('admin');
+  const tabs = getTabsByRole('library');
 
   return (
     <Tab.Navigator
