@@ -1,6 +1,7 @@
 import { type NavigationProp, type ParamListBase, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import colors from '~/common/colors';
 import { BackArrowIcon } from '~/components/SvgIcons';
@@ -15,6 +16,7 @@ const HeaderBar: React.FC<HeaderBarProps> = (props) => {
   const { title } = props;
 
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
+  const insets = useSafeAreaInsets();
 
   const handleBackPress = (): void => {
     // 首先判断是否有上一页。没有就返回首页或登录页
@@ -26,7 +28,7 @@ const HeaderBar: React.FC<HeaderBarProps> = (props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingTop: insets.top, height: 48 + insets.top }]}>
       <TouchableOpacity
         activeOpacity={0.7}
         hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
