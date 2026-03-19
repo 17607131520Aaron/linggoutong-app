@@ -10,6 +10,8 @@ import KingKongArea from './KingKongArea';
 const UI = {
   headerTagBg: 'rgba(255, 255, 255, 0.22)',
   headerTagBorder: 'rgba(255, 255, 255, 0.18)',
+  tabPillBg: 'rgba(43, 107, 255, 0.08)',
+  tabPillBorder: 'rgba(43, 107, 255, 0.18)',
 } as const;
 
 const LibraryHome: React.FC = () => {
@@ -30,7 +32,7 @@ const LibraryHome: React.FC = () => {
           </View>
 
           <View style={styles.todoListDemo}>
-            <Text>我的待办列表</Text>
+            <Text>待办列表待实现中</Text>
           </View>
         </View>
       </SafeAreaWrapper>
@@ -92,7 +94,6 @@ const styles = StyleSheet.create({
   todoListDemo: {
     width: '100%',
     flex: 1,
-    backgroundColor: colors.white,
   },
 });
 

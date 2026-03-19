@@ -21,9 +21,10 @@ export const COLORS = {
 } as const;
 
 export const TABS: TabItem[] = [
-  { key: 'missing', label: '缺料待处理', count: 8 },
+  { key: 'missing', label: '缺料待处理', count: 3 },
+  { key: 'inbound', label: '待入库', count: 3 },
+  { key: 'outbound', label: '待出库', count: 2 },
   { key: 'dispatch', label: '物料待派发', count: 3 },
-  { key: 'inventory', label: '当月待盘点', count: 1 },
 ];
 
 export const MOCK_DATA: TodoItem[] = [
