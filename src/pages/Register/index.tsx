@@ -1,17 +1,17 @@
 import { type NavigationProp, type ParamListBase, useNavigation } from '@react-navigation/native';
-import { type FC, useEffect, useMemo, useState } from 'react';
+import { type FC, useEffect, useMemo, useRef, useState } from 'react';
 import {
   Alert,
   Animated,
   KeyboardAvoidingView,
   Platform,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import CustomButton from '~/components/CustomButton';
 import { SafeAreaWrapper } from '~/components/SafeAreaWrapper';
@@ -31,6 +31,8 @@ const RegisterPage: FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<RegisterFieldErrors>({});
+
+  const scrollRef = useRef<KeyboardAwareScrollView | null>(null);
 
   const glowAnim = useMemo(() => new Animated.Value(0), []);
   const gridAnim = useMemo(() => new Animated.Value(0), []);
@@ -147,11 +149,16 @@ const RegisterPage: FC = () => {
         />
 
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 80 : 0}
           style={styles.flex}
         >
-          <ScrollView
+          <KeyboardAwareScrollView
+            ref={scrollRef}
+            enableOnAndroid
             contentContainerStyle={styles.content}
+            extraScrollHeight={40}
+            keyboardOpeningTime={0}
             keyboardShouldPersistTaps='handled'
             showsVerticalScrollIndicator={false}
           >
@@ -249,7 +256,7 @@ const RegisterPage: FC = () => {
                 <Text style={styles.footerLink}>隐私政策</Text>
               </Text>
             </View>
-          </ScrollView>
+          </KeyboardAwareScrollView>
         </KeyboardAvoidingView>
       </View>
     </SafeAreaWrapper>
@@ -302,7 +309,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: 18,
     paddingTop: 26,
-    paddingBottom: 22,
   },
   hero: {
     alignItems: 'center',
