@@ -1,12 +1,14 @@
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
+
+import { SafeAreaWrapper } from '~/components/SafeAreaWrapper';
 
 import type { FC } from 'react';
 
 const LibraryHome: FC = () => {
   return (
-    <View>
+    <SafeAreaWrapper>
       <Text>库管工作台-首页</Text>
-    </View>
+    </SafeAreaWrapper>
   );
 };
 
