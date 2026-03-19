@@ -1,3 +1,4 @@
+import { type NavigationProp, type ParamListBase, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -15,6 +16,12 @@ const UI = {
 } as const;
 
 const LibraryHome: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
+
+  const onPressScan = (): void => {
+    navigation.navigate('LibraryScan');
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaWrapper edges={['top', 'bottom']}>
@@ -26,7 +33,7 @@ const LibraryHome: React.FC = () => {
         </View>
         <KingKongArea />
         <View style={styles.content}>
-          <ArrivalInventory />
+          <ArrivalInventory onPressScan={onPressScan} />
           <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>我的待办 (12)</Text>
           </View>
