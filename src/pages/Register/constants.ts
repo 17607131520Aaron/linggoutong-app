@@ -1,0 +1,32 @@
+import colors from '~/common/colors';
+
+export const uiColors = {
+  bg1: '#050B18',
+  bg2: '#061C2C',
+  bg3: '#11103A',
+  transparent: 'transparent',
+  neonCyan: '#00E0FF',
+  neonPurple: '#7B61FF',
+  primary: colors.brandPrimary,
+  linkBlue: 'rgba(138, 180, 248, 0.95)',
+  focusBorder: 'rgba(138, 180, 248, 0.55)',
+  errorRed: 'rgba(255, 107, 107, 0.95)',
+  white06: 'rgba(255,255,255,0.06)',
+  white10: 'rgba(255,255,255,0.10)',
+  white14: 'rgba(255,255,255,0.14)',
+  white22: 'rgba(138, 180, 248, 0.22)',
+  white35: 'rgba(255,255,255,0.35)',
+  white55: 'rgba(255,255,255,0.55)',
+  white60: 'rgba(255,255,255,0.60)',
+  white66: 'rgba(255,255,255,0.66)',
+  white70: 'rgba(255,255,255,0.70)',
+  white75: 'rgba(255,255,255,0.75)',
+  white85: 'rgba(255,255,255,0.85)',
+  cardBg: 'rgba(255,255,255,0.08)',
+  fieldBg: 'rgba(0,0,0,0.22)',
+  glowPrimary: 'rgba(43, 107, 255, 0.30)',
+  glowPurple: 'rgba(123, 97, 255, 0.26)',
+  buttonDisabled1: '#3C4A6A',
+  buttonDisabled2: '#2A3552',
+} as const;
+
