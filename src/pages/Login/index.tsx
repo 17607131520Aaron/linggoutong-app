@@ -88,7 +88,7 @@ const LoginPage: FC = () => {
   const gridTranslateY = gridAnim.interpolate({ inputRange: [0, 1], outputRange: [0, -28] });
 
   return (
-    <SafeAreaWrapper edges={['top', 'bottom']}>
+    <SafeAreaWrapper edges={['top', 'bottom']} style={styles.safeArea}>
       <View style={styles.root}>
         <View style={styles.bgBase} />
         <View pointerEvents='none' style={styles.bgNoise} />
@@ -138,7 +138,6 @@ const LoginPage: FC = () => {
             </View>
 
             <View style={styles.card}>
-              <View pointerEvents='none' style={styles.cardTopGlow} />
               <Text style={styles.cardTitle}>欢迎回来</Text>
 
               <View style={styles.field}>
@@ -226,6 +225,7 @@ const LoginPage: FC = () => {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  safeArea: { flex: 1, backgroundColor: uiColors.bg1 },
   root: {
     flex: 1,
     backgroundColor: uiColors.bg1,
@@ -290,12 +290,12 @@ const styles = StyleSheet.create({
   subtitle: {
     marginTop: 8,
     color: uiColors.white66,
-    fontSize: 13,
+    fontSize: 14,
   },
   card: {
     marginTop: 10,
     borderRadius: 18,
-    padding: 16,
+    padding: 18,
     borderWidth: 1,
     borderColor: uiColors.white14,
     backgroundColor: uiColors.cardBg,
@@ -303,18 +303,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.35,
     shadowRadius: 22,
-    elevation: 6,
     overflow: 'hidden',
   },
-  cardTopGlow: {
-    position: 'absolute',
-    top: -1,
-    left: -1,
-    right: -1,
-    height: 2,
-    backgroundColor: uiColors.neonCyan,
-    opacity: 0.45,
-  },
+
   cardTitle: {
     color: uiColors.white85,
     fontSize: 18,

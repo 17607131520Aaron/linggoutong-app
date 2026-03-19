@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 interface SafeAreaWrapperProps {
   children: React.ReactNode;
   edges?: ('top' | 'right' | 'bottom' | 'left')[];
+  style: object;
 }
 
 /**
@@ -14,9 +15,10 @@ interface SafeAreaWrapperProps {
 export const SafeAreaWrapper: React.FC<SafeAreaWrapperProps> = ({
   children,
   edges = ['top', 'bottom'],
+  style,
 }) => {
   return (
-    <SafeAreaView edges={edges} style={styles.container}>
+    <SafeAreaView edges={edges} style={[styles.container, style]}>
       {children}
     </SafeAreaView>
   );
