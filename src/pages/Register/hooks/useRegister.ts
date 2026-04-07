@@ -6,7 +6,7 @@ import type {
   KeyboardAwareScrollViewInstance,
   RegisterFieldErrors,
   UseRegisterReturn,
-} from './types';
+} from '../types';
 
 const useRegister = (): UseRegisterReturn => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
@@ -17,29 +17,6 @@ const useRegister = (): UseRegisterReturn => {
   const [errors, setErrors] = useState<RegisterFieldErrors>({});
 
   const scrollRef = useRef<KeyboardAwareScrollViewInstance>(null);
-
-  // useEffect(() => {
-  //   const glowLoop = Animated.loop(
-  //     Animated.timing(glowAnim, {
-  //       toValue: 1,
-  //       duration: 6800,
-  //       useNativeDriver: true,
-  //     }),
-  //   );
-  //   const gridLoop = Animated.loop(
-  //     Animated.timing(gridAnim, {
-  //       toValue: 1,
-  //       duration: 12000,
-  //       useNativeDriver: true,
-  //     }),
-  //   );
-  //   glowLoop.start();
-  //   gridLoop.start();
-  //   return () => {
-  //     glowLoop.stop();
-  //     gridLoop.stop();
-  //   };
-  // }, [glowAnim, gridAnim]);
 
   const canSubmit = useMemo(() => {
     const ok =
