@@ -1,7 +1,5 @@
-import { type NavigationProp, type ParamListBase, useNavigation } from '@react-navigation/native';
-import { type FC, useEffect, useMemo, useRef, useState } from 'react';
+import { type FC, useEffect, useMemo } from 'react';
 import {
-  Alert,
   Animated,
   KeyboardAvoidingView,
   Platform,
@@ -17,25 +15,32 @@ import CustomButton from '~/components/CustomButton';
 import { SafeAreaWrapper } from '~/components/SafeAreaWrapper';
 
 import { uiColors } from './constants.ts';
-
-interface RegisterFieldErrors {
-  account?: string;
-  password?: string;
-  confirmPassword?: string;
-}
+import useRegister from './useRegister';
 
 const RegisterPage: FC = () => {
-  const navigation = useNavigation<NavigationProp<ParamListBase>>();
-  const [account, setAccount] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [errors, setErrors] = useState<RegisterFieldErrors>({});
-
-  const scrollRef = useRef<KeyboardAwareScrollView | null>(null);
-
   const glowAnim = useMemo(() => new Animated.Value(0), []);
   const gridAnim = useMemo(() => new Animated.Value(0), []);
+
+  const {
+    scrollRef,
+    errors,
+    account,
+    handleAccountChange,
+    password,
+    handlePasswordChange,
+    confirmPassword,
+    handleConfirmPasswordChange,
+    handleRegister,
+    canSubmit,
+    submitting,
+    navigateToLogin,
+  } = useRegister();
+
+  const glow1TranslateX = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [-40, 30] });
+  const glow1TranslateY = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [10, -20] });
+  const glow2TranslateX = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [20, -30] });
+  const glow2TranslateY = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [-10, 25] });
+  const gridTranslateY = gridAnim.interpolate({ inputRange: [0, 1], outputRange: [0, -28] });
 
   useEffect(() => {
     const glowLoop = Animated.loop(
@@ -59,59 +64,6 @@ const RegisterPage: FC = () => {
       gridLoop.stop();
     };
   }, [glowAnim, gridAnim]);
-
-  const canSubmit = useMemo(() => {
-    const ok =
-      account.trim().length > 0 &&
-      password.length >= 6 &&
-      confirmPassword.length >= 6 &&
-      password === confirmPassword;
-    return ok && !submitting;
-  }, [account, password, confirmPassword, submitting]);
-
-  const validate = (): RegisterFieldErrors => {
-    const next: RegisterFieldErrors = {};
-    if (!account.trim()) next.account = '请输入手机号 / 邮箱 / 工号';
-    if (!password) next.password = '请输入密码';
-    if (password && password.length < 6) next.password = '密码至少 6 位';
-    if (!confirmPassword) next.confirmPassword = '请再次输入密码';
-    if (confirmPassword && confirmPassword.length < 6) next.confirmPassword = '密码至少 6 位';
-    if (password && confirmPassword && password !== confirmPassword) {
-      next.confirmPassword = '两次输入的密码不一致';
-    }
-    return next;
-  };
-
-  const navigateToLogin = (): void => {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-      return;
-    }
-    navigation.navigate('Login');
-  };
-
-  const handleRegister = (): void => {
-    const nextErrors = validate();
-    setErrors(nextErrors);
-    if (Object.keys(nextErrors).length) return;
-
-    setSubmitting(true);
-    setTimeout(() => {
-      Alert.alert('注册成功', '现在可以使用新账号登录。', [
-        {
-          text: '去登录',
-          onPress: navigateToLogin,
-        },
-      ]);
-      setSubmitting(false);
-    }, 650);
-  };
-
-  const glow1TranslateX = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [-40, 30] });
-  const glow1TranslateY = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [10, -20] });
-  const glow2TranslateX = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [20, -30] });
-  const glow2TranslateY = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [-10, 25] });
-  const gridTranslateY = gridAnim.interpolate({ inputRange: [0, 1], outputRange: [0, -28] });
 
   return (
     <SafeAreaWrapper edges={['top', 'bottom']} style={styles.safeArea}>
@@ -182,10 +134,7 @@ const RegisterPage: FC = () => {
                   returnKeyType='next'
                   style={[styles.input, errors.account && styles.inputError]}
                   value={account}
-                  onChangeText={(v) => {
-                    setAccount(v);
-                    if (errors.account) setErrors((prev) => ({ ...prev, account: undefined }));
-                  }}
+                  onChangeText={handleAccountChange}
                 />
                 {!!errors.account && <Text style={styles.errorText}>{errors.account}</Text>}
               </View>
@@ -200,13 +149,7 @@ const RegisterPage: FC = () => {
                   returnKeyType='next'
                   style={[styles.input, errors.password && styles.inputError]}
                   value={password}
-                  onChangeText={(v) => {
-                    setPassword(v);
-                    if (errors.password) setErrors((prev) => ({ ...prev, password: undefined }));
-                    if (errors.confirmPassword && confirmPassword && v === confirmPassword) {
-                      setErrors((prev) => ({ ...prev, confirmPassword: undefined }));
-                    }
-                  }}
+                  onChangeText={handlePasswordChange}
                 />
                 {!!errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
               </View>
@@ -221,12 +164,7 @@ const RegisterPage: FC = () => {
                   returnKeyType='done'
                   style={[styles.input, errors.confirmPassword && styles.inputError]}
                   value={confirmPassword}
-                  onChangeText={(v) => {
-                    setConfirmPassword(v);
-                    if (errors.confirmPassword) {
-                      setErrors((prev) => ({ ...prev, confirmPassword: undefined }));
-                    }
-                  }}
+                  onChangeText={handleConfirmPasswordChange}
                   onSubmitEditing={handleRegister}
                 />
                 {!!errors.confirmPassword && (

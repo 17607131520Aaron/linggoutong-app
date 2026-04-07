@@ -9,7 +9,7 @@ import type { FC } from 'react';
 const LibraryHome: FC = () => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
   return (
-    <SafeAreaWrapper>
+    <SafeAreaWrapper edges={['top', 'bottom']} style={{}}>
       <Text>库管工作台-首页</Text>
       <View>
         <CustomButton

@@ -29,4 +29,3 @@ export const uiColors = {
   buttonDisabled1: '#3C4A6A',
   buttonDisabled2: '#2A3552',
 } as const;
-
