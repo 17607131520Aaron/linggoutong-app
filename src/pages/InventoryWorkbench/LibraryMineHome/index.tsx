@@ -1,4 +1,4 @@
-import { useNavigation, type NavigationProp, type ParamListBase } from '@react-navigation/native';
+import { type NavigationProp, type ParamListBase, useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 

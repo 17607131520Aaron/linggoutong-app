@@ -1,3 +1,4 @@
+import {} from 'ahooks';
 import React from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
@@ -21,8 +22,6 @@ const Debug: React.FC = () => {
 
   const debugItems: DebugItem[] = [
     { key: 'env', label: '切换环境', value: 'test', onPress: () => {} },
-    { key: 'post', label: '切换岗位', value: '上门服务中心', onPress: () => {} },
-    { key: 'role', label: '切换角色', value: '上门服务中心', onPress: () => {} },
     // 调试工具
     { key: 'debugTool', label: '调试工具', value: '调试工具', onPress: () => handleItemPress },
   ];
