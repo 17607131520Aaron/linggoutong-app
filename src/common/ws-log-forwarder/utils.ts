@@ -12,15 +12,39 @@ export const safeExecute = <T>(fn: () => T, fallback?: T): T => {
   }
 };
 
-export const originalConsole: Partial<Record<ConsoleMethod, (...args: any[]) => void>> = (() => {
+type OriginalConsoleMap = Partial<Record<ConsoleMethod, (...args: any[]) => void>>;
+
+const getOriginalConsoleFromGlobal = (): OriginalConsoleMap | null => {
+  const g = globalThis as unknown as Record<string, unknown>;
+  const existing = g.__WS_LOGGER_ORIGINAL_CONSOLE__;
+  if (existing && typeof existing === 'object') {
+    return existing as OriginalConsoleMap;
+  }
+  return null;
+};
+
+const setOriginalConsoleToGlobal = (value: OriginalConsoleMap): void => {
+  const g = globalThis as unknown as Record<string, unknown>;
+  g.__WS_LOGGER_ORIGINAL_CONSOLE__ = value;
+};
+
+export const originalConsole: OriginalConsoleMap = (() => {
+  const existing = getOriginalConsoleFromGlobal();
+  if (existing) {
+    return existing;
+  }
+
   const methods: ConsoleMethod[] = ['log', 'info', 'warn', 'error', 'debug'];
-  return methods.reduce((acc, method) => {
+  const captured = methods.reduce((acc, method) => {
     // eslint-disable-next-line no-console
     const fn = console[method] as unknown;
     acc[method] =
       typeof fn === 'function' ? (fn as (...args: any[]) => void).bind(console) : undefined;
     return acc;
-  }, {} as Partial<Record<ConsoleMethod, (...args: any[]) => void>>);
+  }, {} as OriginalConsoleMap);
+
+  setOriginalConsoleToGlobal(captured);
+  return captured;
 })();
 
 export const safeConsoleCall = (method: ConsoleMethod, ...args: any[]): void => {

@@ -15,6 +15,7 @@ import {
   isBlobInstance,
   isFormDataInstance,
   normalizeHeaders,
+  originalConsole,
   safeConsoleCall,
   safeExecute,
   serializePayloadPreview,
@@ -386,7 +387,7 @@ class WebSocketManager {
 class ConsoleWrapper {
   wsManager: WebSocketManager;
   wrappedMethods: Record<string, (...args: any[]) => void> | null;
-  baseConsole: Record<string, (...args: any[]) => void> | null;
+  baseConsole: Partial<Record<string, (...args: any[]) => void>> | null;
 
   constructor(wsManager: WebSocketManager) {
     this.wsManager = wsManager;
@@ -396,15 +397,13 @@ class ConsoleWrapper {
 
   createWrappedMethods(): Record<string, (...args: any[]) => void> {
     this.baseConsole ??= (() => {
-      /* eslint-disable no-console */
       const base = {
-        log: console.log,
-        info: console.info,
-        warn: console.warn,
-        error: console.error,
-        debug: console.debug,
+        log: originalConsole.log,
+        info: originalConsole.info,
+        warn: originalConsole.warn,
+        error: originalConsole.error,
+        debug: originalConsole.debug,
       };
-      /* eslint-enable no-console */
       return base;
     })();
 
