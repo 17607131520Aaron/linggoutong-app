@@ -3,6 +3,7 @@ export const STORAGE_KEYS = {
   REFRESH_TOKEN: 'refresh_token',
   USER_INFO: 'user_info',
   USER_ID: 'user_id',
+  WS_LOGGER_CONFIG: 'ws_logger_config',
   LANGUAGE: 'language',
   THEME: 'theme',
 } as const;

@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Pressable, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import Modal from 'react-native-modal';
 
 import colors from '~/common/colors';
+import createSingletonModalHook from '~/hooks/useSingletonModal';
 
-interface WSLoggerConfigModalProps {
+export interface WSLoggerModalValues {
+  wsEnabled: boolean;
+  wsIp: string;
+}
+
+export interface WSLoggerModalOpenProps {
+  initialWsEnabled?: boolean;
+  initialWsIp?: string;
+  onSave?: (values: WSLoggerModalValues) => void;
+}
+
+interface WSLoggerConfigModalProps extends WSLoggerModalOpenProps {
   isVisible: boolean;
   onClose: () => void;
-  wsEnabled: boolean;
-  setWsEnabled: (enabled: boolean) => void;
-  wsIp: string;
-  setWsIp: (ip: string) => void;
 }
+
 const WSLoggerConfigModal: React.FC<WSLoggerConfigModalProps> = (props) => {
-  const { isVisible, onClose, wsEnabled, setWsEnabled, wsIp, setWsIp } = props;
+  const { isVisible, onClose, initialWsEnabled = false, initialWsIp = '', onSave } = props;
+
+  const [wsEnabled, setWsEnabled] = useState(initialWsEnabled);
+  const [wsIp, setWsIp] = useState(initialWsIp);
+
   return (
     <Modal
       hideModalContentWhileAnimating
@@ -57,7 +70,8 @@ const WSLoggerConfigModal: React.FC<WSLoggerConfigModalProps> = (props) => {
           <Pressable
             style={[styles.btn, styles.btnPrimary]}
             onPress={() => {
-              // applyWSLoggerConfig().catch(() => undefined);
+              onSave?.({ wsEnabled, wsIp });
+              onClose();
             }}
           >
             <Text style={[styles.btnText, styles.btnPrimaryText]}>保存</Text>
@@ -67,6 +81,9 @@ const WSLoggerConfigModal: React.FC<WSLoggerConfigModalProps> = (props) => {
     </Modal>
   );
 };
+
+export const useWSLoggerModal =
+  createSingletonModalHook<WSLoggerModalOpenProps>(WSLoggerConfigModal);
 
 const styles = StyleSheet.create({
   modalCard: {
