@@ -11,6 +11,9 @@ prepare_react_native_project!
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
   Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  # When building Pods as frameworks (use_frameworks!), enable module maps for headers.
+  # This prevents Clang's `-Werror=non-modular-include-in-framework-module` failures.
+  use_modular_headers!
   use_frameworks! :linkage => linkage.to_sym
 end
 
