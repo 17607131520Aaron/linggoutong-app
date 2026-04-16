@@ -7,7 +7,7 @@ const NULL_TOKEN = '__MMKV_NULL__';
 type PrimitiveValue = string | number | boolean;
 type JsonValue = string | number | boolean | null | { [key: string]: JsonValue } | JsonValue[];
 
-export type StorageValue = PrimitiveValue | JsonValue;
+export type StorageValue = PrimitiveValue | JsonValue | ArrayBuffer;
 
 class Storage {
   private readonly instance: MMKV;
@@ -34,6 +34,11 @@ class Storage {
     const numValue = this.instance.getNumber(key);
     if (numValue !== undefined) {
       return numValue as T;
+    }
+
+    const bufferValue = this.instance.getBuffer(key);
+    if (bufferValue !== undefined) {
+      return bufferValue as T;
     }
 
     return null;
@@ -63,12 +68,24 @@ class Storage {
     return this.instance.getAllKeys();
   }
 
-  private encode(value: StorageValue): string | number | boolean {
+  get size(): number {
+    return this.instance.size;
+  }
+
+  trim(): void {
+    this.instance.trim();
+  }
+
+  private encode(value: StorageValue): string | number | boolean | ArrayBuffer {
     if (value === null) {
       return NULL_TOKEN;
     }
 
     if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
+      return value;
+    }
+
+    if (value instanceof ArrayBuffer) {
       return value;
     }
 

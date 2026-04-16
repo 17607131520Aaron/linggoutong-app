@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
@@ -11,10 +10,9 @@ import storage from '~/utils/storage';
 import { readLocalWSLoggerConfig } from './utils';
 
 import type { WSLoggerConfig } from './types';
-import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 const Debug: React.FC = () => {
-  const navigation = useNavigation<NavigationProp<ParamListBase>>();
+  // const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const { opne } = useWSLoggerModal();
   const [wsConfig, setWsConfig] = useState<WSLoggerConfig>(() => readLocalWSLoggerConfig());
 
@@ -52,9 +50,6 @@ const Debug: React.FC = () => {
       key: 'storageTest',
       label: '存储工具测试',
       value: 'MMKV',
-      onPress: () => {
-        navigation.navigate('StorageTest');
-      },
     },
   ];
   return (

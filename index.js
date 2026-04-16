@@ -3,14 +3,6 @@
  */
 
 import { AppRegistry } from 'react-native';
-// import { polyfill as polyfillEncoding } from 'react-native-polyfill-globals/src/encoding';
-// import { polyfill as polyfillFetch } from 'react-native-polyfill-globals/src/fetch';
-// import { polyfill as polyfillReadableStream } from 'react-native-polyfill-globals/src/readable-stream';
-
-// // 支持流式接口
-// polyfillFetch();
-// polyfillEncoding();
-// polyfillReadableStream();
 
 import { name as appName } from './app.json';
 import App from './src/app';
@@ -18,8 +10,11 @@ import App from './src/app';
 if (__DEV__) {
   (async () => {
     try {
-      // Delay loading MMKV-based storage so app bootstrap won't crash
-      // if the native module isn't ready or fails to initialize.
+      if (global.__WS_LOGGER_BOOTSTRAP_DONE__) {
+        return;
+      }
+      global.__WS_LOGGER_BOOTSTRAP_DONE__ = true;
+
       const [{ default: storage }, { default: STORAGE_KEYS }] = await Promise.all([
         import('./src/utils/storage'),
         import('./src/common/storage-keys'),
@@ -35,6 +30,8 @@ if (__DEV__) {
       }
 
       if (wsEnabled) {
+        console.info('[WS Logger] 已启用，将在开发环境安装转发器', wsIp ? `(IP: ${wsIp})` : '');
+
         // Delay installing monkey-patches (console/fetch/XHR) until after bootstrap.
         const { installWSLogger } = await import('./src/common/ws-log-forwarder');
         setTimeout(() => {
@@ -44,6 +41,8 @@ if (__DEV__) {
             console.warn('[WS Logger] install failed:', error);
           }
         }, 0);
+      } else {
+        console.info('[WS Logger] 未启用（仅开发环境可用）');
       }
     } catch (error) {
       // Don't block app startup if dev logger fails to load.
