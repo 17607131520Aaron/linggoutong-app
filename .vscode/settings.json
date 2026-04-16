@@ -7,7 +7,7 @@
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "never"
   },
 
   // 文件换行等与 Prettier 对齐
@@ -48,7 +48,6 @@
 
   // ESLint 与 Prettier 配合
   "eslint.enable": true,
-  "eslint.packageManager": "yarn",
   "eslint.run": "onType",
   "eslint.format.enable": false,
   "eslint.workingDirectories": [
