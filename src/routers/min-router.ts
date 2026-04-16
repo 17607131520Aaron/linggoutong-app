@@ -1,4 +1,5 @@
 import AboutPage from '~/pages/About';
+import DebugPage from '~/pages/Debug';
 import HomePage from '~/pages/Home';
 import LoginPage from '~/pages/Login';
 import MineHomePage from '~/pages/Mine';
@@ -45,6 +46,14 @@ const mineRoutes: IRouteConfig[] = [
     showHeader: true,
     options: {
       title: '关于',
+    },
+  },
+  {
+    name: 'Debug',
+    component: DebugPage,
+    showHeader: true,
+    options: {
+      title: '调试页面',
     },
   },
 ];

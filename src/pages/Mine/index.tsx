@@ -32,6 +32,13 @@ const MinePages: React.FC = () => {
           navigation.navigate('Register');
         }}
       />
+
+      <CustomButton
+        title='关于 App'
+        onPress={() => {
+          navigation.navigate('About');
+        }}
+      />
     </View>
   );
 };
