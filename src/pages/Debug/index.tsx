@@ -1,4 +1,4 @@
-import { type NavigationProp, type ParamListBase, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
@@ -8,28 +8,10 @@ import ListItem from '~/components/ListItem';
 import { useWSLoggerModal } from '~/pages/Debug/components/WSLoggerConfigModal';
 import storage from '~/utils/storage';
 
-interface WSLoggerConfig {
-  wsEnabled: boolean;
-  wsIp: string;
-}
+import { readLocalWSLoggerConfig } from './utils';
 
-const DEFAULT_WS_LOGGER_CONFIG: WSLoggerConfig = {
-  wsEnabled: false,
-  wsIp: '',
-};
-
-const readLocalWSLoggerConfig = (): WSLoggerConfig => {
-  const raw = storage.getItemSync(STORAGE_KEYS.WS_LOGGER_CONFIG);
-  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
-    return DEFAULT_WS_LOGGER_CONFIG;
-  }
-
-  const config = raw as Record<string, unknown>;
-  return {
-    wsEnabled: typeof config.wsEnabled === 'boolean' ? config.wsEnabled : false,
-    wsIp: typeof config.wsIp === 'string' ? config.wsIp : '',
-  };
-};
+import type { WSLoggerConfig } from './types';
+import type { NavigationProp, ParamListBase } from '@react-navigation/native';
 
 const Debug: React.FC = () => {
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
