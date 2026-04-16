@@ -6,6 +6,7 @@ import re
 import subprocess
 import json
 import shutil
+import tempfile
 from pathlib import Path
 
 # 应用名称常量 - 在这里修改应用名称
@@ -40,6 +41,15 @@ def get_convert_command():
 def run_convert(*args):
     """执行图片转换命令"""
     subprocess.run(get_convert_command() + list(args), check=True)
+
+def normalize_icon_to_png(icon_path):
+    """标准化图标为真实PNG格式，避免扩展名与内容不一致导致构建失败"""
+    normalized_path = Path(tempfile.gettempdir()) / f"app_icon_normalized_{os.getpid()}.png"
+    run_convert(
+        str(icon_path),
+        'PNG32:' + str(normalized_path)
+    )
+    return normalized_path
 
 def change_app_name():
     """修改应用名称"""
@@ -92,11 +102,18 @@ def update_app_icon():
         print(f'❌ 图标文件不存在: {icon_path}')
         return
 
-    # 更新Android图标
-    update_android_icon(icon_path)
+    normalized_icon_path = normalize_icon_to_png(icon_path)
+    print(f'✅ 图标已标准化为PNG: {normalized_icon_path}')
 
-    # 更新iOS图标
-    update_ios_icon(icon_path)
+    try:
+        # 更新Android图标
+        update_android_icon(normalized_icon_path)
+
+        # 更新iOS图标
+        update_ios_icon(normalized_icon_path)
+    finally:
+        if normalized_icon_path.exists():
+            normalized_icon_path.unlink()
 
 def update_android_icon(icon_path):
     """更新Android图标"""

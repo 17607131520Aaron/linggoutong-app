@@ -222,19 +222,25 @@ def build_bundle():
     print('📜 构建 JavaScript Bundle...')
     project_root = get_project_root()
     android_dir = project_root / 'android'
+    res_dir = android_dir / 'app' / 'src' / 'main' / 'res'
 
     # 确保 assets 目录存在
     assets_dir = android_dir / 'app' / 'src' / 'main' / 'assets'
     assets_dir.mkdir(parents=True, exist_ok=True)
 
+    # 清理旧的 Metro 导出资源，避免缓存导致旧格式文件残留
+    for stale_asset in res_dir.glob('drawable*/src_assets_app_icon.*'):
+        stale_asset.unlink()
+
     # 构建 bundle
     cmd = [
         'npx', 'react-native', 'bundle',
         '--platform', 'android',
+        '--reset-cache',
         '--dev', 'false',
         '--entry-file', 'index.js',
         '--bundle-output', str(assets_dir / 'index.android.bundle'),
-        '--assets-dest', str(android_dir / 'app' / 'src' / 'main' / 'res'),
+        '--assets-dest', str(res_dir),
     ]
 
     result = subprocess.run(cmd, cwd=project_root)
