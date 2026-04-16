@@ -23,6 +23,9 @@ target 'LingGoApp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # WatermelonDB dependency (required by WatermelonDB iOS implementation)
+  pod 'simdjson', :path => '../node_modules/@nozbe/simdjson', :modular_headers => true
+
   post_install do |installer|
     react_native_post_install(
       installer,

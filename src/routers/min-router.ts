@@ -1,5 +1,6 @@
 import AboutPage from '~/pages/About';
 import DebugPage from '~/pages/Debug';
+import DebugDBPage from '~/pages/Debug/DebugDB';
 import HomePage from '~/pages/Home';
 import LoginPage from '~/pages/Login';
 import MineHomePage from '~/pages/Mine';
@@ -54,6 +55,14 @@ const mineRoutes: IRouteConfig[] = [
     showHeader: true,
     options: {
       title: '调试页面',
+    },
+  },
+  {
+    name: 'DebugDB',
+    component: DebugDBPage,
+    showHeader: true,
+    options: {
+      title: 'DB 增删改查',
     },
   },
 ];

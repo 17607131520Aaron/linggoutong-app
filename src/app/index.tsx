@@ -7,6 +7,7 @@ import StartupErrorScreen from '~/app/StartupErrorScreen';
 import StartupScreen from '~/app/StartupScreen';
 import colors from '~/common/colors';
 import HeaderBar from '~/components/header-bar';
+import { warmUpDb } from '~/db';
 import { allRoutes } from '~/routers';
 
 const RootStack = createNativeStackNavigator();
@@ -28,7 +29,7 @@ const getUserInfo = async (): Promise<void> => {
 
 const preloadResources = async (): Promise<void> => {
   // 在这里集中等待首屏必须资源，避免首次冷启动白屏。
-  await Promise.all([getUserInfo()]);
+  await Promise.all([warmUpDb(), getUserInfo()]);
 };
 
 const withTimeout = async <T,>(promise: Promise<T>, timeoutMs: number): Promise<T> => {

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { type NavigationProp, type ParamListBase, useNavigation } from '@react-navigation/native';
+import React, { useMemo, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
 import colors from '~/common/colors';
@@ -12,7 +13,7 @@ import { readLocalWSLoggerConfig } from './utils';
 import type { WSLoggerConfig } from './types';
 
 const Debug: React.FC = () => {
-  // const navigation = useNavigation<NavigationProp<ParamListBase>>();
+  const navigation = useNavigation<NavigationProp<ParamListBase>>();
   const { opne } = useWSLoggerModal();
   const [wsConfig, setWsConfig] = useState<WSLoggerConfig>(() => readLocalWSLoggerConfig());
 
@@ -25,33 +26,44 @@ const Debug: React.FC = () => {
     setWsConfig(nextConfig);
   };
 
-  const debugItems = [
-    { key: 'env', label: '切换环境', value: 'test', onPress: () => {} },
-    {
-      key: 'wsLogger',
-      label: 'WS Logger 调试工具',
-      value: wsConfig.wsEnabled ? `已启用${wsConfig.wsIp ? ` (${wsConfig.wsIp})` : ''}` : '未启用',
-      onPress: () => {
-        const localConfig = readLocalWSLoggerConfig();
-        setWsConfig(localConfig);
-        opne({
-          initialWsEnabled: localConfig.wsEnabled,
-          initialWsIp: localConfig.wsIp,
-          onSave: (values) => {
-            persistWSLoggerConfig({
-              wsEnabled: values.wsEnabled,
-              wsIp: values.wsIp.trim(),
-            });
-          },
-        });
+  const debugItems = useMemo(
+    () => [
+      { key: 'env', label: '切换环境', value: 'test', onPress: () => {} },
+      {
+        key: 'wsLogger',
+        label: 'WS Logger 调试工具',
+        value: wsConfig.wsEnabled ? `已启用${wsConfig.wsIp ? ` (${wsConfig.wsIp})` : ''}` : '未启用',
+        onPress: () => {
+          const localConfig = readLocalWSLoggerConfig();
+          setWsConfig(localConfig);
+          opne({
+            initialWsEnabled: localConfig.wsEnabled,
+            initialWsIp: localConfig.wsIp,
+            onSave: (values) => {
+              persistWSLoggerConfig({
+                wsEnabled: values.wsEnabled,
+                wsIp: values.wsIp.trim(),
+              });
+            },
+          });
+        },
       },
-    },
-    {
-      key: 'storageTest',
-      label: '存储工具测试',
-      value: 'MMKV',
-    },
-  ];
+      {
+        key: 'storageTest',
+        label: '存储工具测试',
+        value: 'MMKV',
+      },
+      {
+        key: 'dbCrudDemo',
+        label: 'DB 示例页（增删改查）',
+        value: 'app_meta',
+        onPress: () => {
+          navigation.navigate('DebugDB');
+        },
+      },
+    ],
+    [navigation, opne, wsConfig.wsEnabled, wsConfig.wsIp],
+  );
   return (
     <View style={styles.listContent}>
       <FlatList
